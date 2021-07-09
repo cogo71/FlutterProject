@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ultimate_list/model.dart';
 import 'aboutpage.dart';
+import 'infopage.dart';
 import 'item_page.dart';
 import 'main_page.dart';
 
@@ -23,11 +24,13 @@ class Root extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false, //toglie il banner "demo"
       title: 'Ultimate List',
       initialRoute: '/',
       routes: {
         '/': (context) => MainPage(),
         '/about': (context) => AboutPage(),
+        '/info': (context) => InfoPage()
       },
       onGenerateRoute: (route) {
         final uri = Uri.parse(route.name);

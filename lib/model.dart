@@ -4,10 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'dart:math';
 
 class ToBuyItem extends ChangeNotifier {
-  ToBuyItem(this.text, this.bought);
+  ToBuyItem(this.text, this.bought, this.selected);
 
   String text;
   bool bought;
+  bool selected;
 
   void setText(String s) {
     text = s;
@@ -16,6 +17,11 @@ class ToBuyItem extends ChangeNotifier {
 
   void toggle() {
     bought = !bought;
+    notifyListeners();
+  }
+
+  void setSelected() {
+    selected = !selected;
     notifyListeners();
   }
 }
@@ -28,13 +34,21 @@ class ToBuyList extends ChangeNotifier {
   int get totalCount => _tobuy.length;
 
   void Add(String text) {
-    _tobuy.add(ToBuyItem(text, false));
+    _tobuy.add(ToBuyItem(text, false, false));
+
+    notifyListeners();
+  }
+
+  void Delete(int indice) {
+    //_tobuy.removeWhere((item) => _tobuy.indexOf('item') == indice);
+    //_tobuy.remove(indice);
+    _tobuy.removeAt(indice);
 
     notifyListeners();
   }
 
   void dismissAll() {
-    _tobuy.clear;
+    _tobuy.clear();
 
     notifyListeners();
   }

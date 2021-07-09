@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class AboutPage extends StatefulWidget {
+class InfoPage extends StatefulWidget {
   @override
-  _AboutPageState createState() => _AboutPageState();
+  _InfoPageState createState() => _InfoPageState();
 }
 
-class _AboutPageState extends State<AboutPage> {
+class _InfoPageState extends State<InfoPage> {
   int _tabIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('About'),
+        title: Text('Come Funziona'),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(colors: [

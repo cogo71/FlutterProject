@@ -32,29 +32,47 @@ class _ItemPageState extends State<ItemPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Item details'),
+        title: const Text('Dettaglio prodotto'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              const Color.fromRGBO(29, 53, 87, 1),
+              const Color.fromRGBO(69, 123, 157, 1),
+            ], stops: [
+              0.0,
+              1.0
+            ], tileMode: TileMode.clamp),
+          ),
+        ),
+        //backgroundColor: Color.fromRGBO(230, 57, 70, 1),
       ),
       body: Container(
+        color: Color.fromRGBO(29, 53, 87, 1),
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              //'Title',
               context.watch<ToBuyItem>().text,
-              style: Theme.of(context).textTheme.headline4,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+              //Theme.of(context).textTheme.headline4,
             ),
             TextField(
+                style: TextStyle(color: Colors.white),
                 controller: _ctrl,
                 onChanged: (stringa) {
                   debugPrint('contenuto ${stringa}');
                   context.read<ToBuyItem>().setText(stringa);
                 }),
-            Text(context.watch<ToBuyItem>().text),
+            //Text(context.watch<ToBuyItem>().text),
             SizedBox(
               height: 16,
             ),
-            Row(
+            /* Row(
               children: [
                 Text('Is done: '),
                 Checkbox(
@@ -65,14 +83,47 @@ class _ItemPageState extends State<ItemPage> {
                 ),
               ],
             ),
+            */
             Expanded(
               child: Container(),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ElevatedButton(
-                  child: Text('Go back'),
+                FloatingActionButton(
+                    child: const Icon(Icons.done_sharp),
+                    tooltip: 'Premi per aggiungere un articolo',
+                    backgroundColor: Color.fromRGBO(230, 57, 70, 1),
+                    onPressed: () {
+                      Navigator.of(context).pop(true);
+                    }),
+                FloatingActionButton(
+                    child: const Icon(Icons.clear),
+                    tooltip: 'Premi per eliminare questo articolo',
+                    backgroundColor: Color.fromRGBO(230, 57, 70, 1),
+                    onPressed: () {
+                      int _indice;
+                      setState(() {
+                        _indice = context
+                            .read<ToBuyList>()
+                            .tobuy
+                            .indexOf(context.read<ToBuyItem>());
+                      });
+                      //int indice;
+                      //indice = context.read<ToBuyList>().totalCount;
+                      //al momento cancello l'ultimo
+                      context.read<ToBuyList>().Delete(_indice);
+                      Navigator.of(context).pop(true);
+                    }),
+                /*TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                  },
+                  style: ButtonStyle(
+                      textStyle: MaterialStateProperty.all(
+                          TextStyle(fontWeight: FontWeight.bold))),
+
                   onPressed: () async {
                     // Apertura asincrona di dialogo
                     var mustClose = await showDialog(
@@ -108,8 +159,9 @@ class _ItemPageState extends State<ItemPage> {
                     if (mustClose != null && mustClose)
                       Navigator.of(context).pop();
                   },
-                ),
-                ElevatedButton(
+                  */
+
+                /*ElevatedButton(
                   child: Text('Apri pagina about'),
                   onPressed: () {
                     // Apertura di pagina sopra a pagina corrente
@@ -120,7 +172,7 @@ class _ItemPageState extends State<ItemPage> {
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         '/about', (route) => route.settings.name == '/');
                   },
-                )
+                )*/
               ],
             ),
           ],
