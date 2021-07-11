@@ -62,20 +62,11 @@ class MainPage extends StatelessWidget {
                       builder: (content, tobuy, _) {
                         // _ indica di ignorare il terzo parametro che in questo caso non usiamo altrimenti avrei child
                         debugPrint('building del consumer');
-                        return Text('Numero di prodotti: ${tobuy.totalCount}',
+                        return Text('Prodotti in lista: ${tobuy.totalCount}',
                             style: TextStyle(color: Colors.white));
                       },
                     ),
                   ),
-                  /*ElevatedButton(
-                      child: Text('Aggiungi un prodotto'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Color.fromRGBO(230, 57, 70, 1),
-                      ),
-                      onPressed: () {
-                        context.read<ToBuyList>().Add('nuovo prodotto');
-                      })
-                      */
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -86,16 +77,6 @@ class MainPage extends StatelessWidget {
                           onPressed: () {
                             context.read<ToBuyList>().Add('prodotto');
                           }),
-                      //FloatingActionButton(
-                      //    child: const Icon(Icons.clear),
-                      //    tooltip: 'Premi per eliminare un articolo',
-                      //    backgroundColor: Color.fromRGBO(230, 57, 70, 1),
-                      //    onPressed: () {
-                      //      int indice;
-                      //      indice = _ItemViewer.;
-                      //      //al momento cancello l'ultimo
-                      //      context.read<ToBuyList>().Delete(1);
-                      //    }),
                       FloatingActionButton(
                           child: const Icon(Icons.clear_all),
                           tooltip: 'Premi per eliminare tutti gli articolo',
@@ -118,25 +99,49 @@ class _ItemViewer extends StatelessWidget {
     debugPrint('Building $runtimeType');
 
     return GestureDetector(
-        onLongPress: () {
-          //final item = context.read<ToBuyItem>().activate(item.);
-          final item = context.read<ToBuyList>().activate(index);
-        },
-        onHorizontalDragEnd: (DragEndDetails) {
-          //se l'item viene trascinato va tolto dalla lista ma non cancellato
-          final item = context.read<ToBuyList>().activate(index);
+        onHorizontalDragEnd: (DragEndDetails details) async {
+          var dachiudere = await showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text('Elimina'),
+                  content:
+                      Text('Sei sicuro di voler eliminare questo prodotto?'),
+                  backgroundColor: Color.fromRGBO(69, 123, 157, 0.8),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  actions: [
+                    TextButton(
+                        child: Text('OK'),
+                        onPressed: () {
+                          Navigator.of(context).pop(true);
+                        },
+                        style: ButtonStyle(
+                            textStyle: MaterialStateProperty.all(TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)))),
+                    TextButton(
+                        child: Text('Annulla'),
+                        onPressed: () {
+                          Navigator.of(context).pop(false);
+                        },
+                        style: ButtonStyle(
+                            textStyle: MaterialStateProperty.all(TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white)))),
+                  ],
+                );
+              });
+          if (dachiudere != null && dachiudere) {
+            context.read<ToBuyList>().Delete(index);
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed('/');
+          }
         },
         onTap: () {
           final item = context.read<ToBuyItem>();
 
           Navigator.of(context).pushNamed('/item/${index}');
-
-          /*Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-          return ChangeNotifierProvider.value(
-            value: item,
-            child: ItemPage(),
-          );
-        })); */
         },
         child: Container(
             margin: const EdgeInsets.all(10),

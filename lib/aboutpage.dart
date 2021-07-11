@@ -25,104 +25,61 @@ class _AboutPageState extends State<AboutPage> {
           ),
         ),
       ),
-      body: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Builder(
-            builder: (context) {
-              switch (_tabIndex) {
-                case 1:
-                  return LayoutBuilder(builder: (context, constraints) {
-                    return SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Changelog',
-                            style: Theme.of(context).textTheme.headline3,
-                          ),
-                          SizedBox(height: 20),
-                          Text('November 2020',
-                              style: Theme.of(context).textTheme.headline5),
-                          Text(
-                              'Nostrud elit enim fugiat dolor quis deserunt dolor. Duis velit dolor proident ea do voluptate. Culpa eu commodo proident officia. Amet id dolore incididunt in aliquip Lorem elit Lorem ex laboris nisi ex irure.'),
-                          Divider(),
-                          Text('October 2020',
-                              style: Theme.of(context).textTheme.headline5),
-                          Text(
-                              'Nostrud elit enim fugiat dolor quis deserunt dolor. Duis velit dolor proident ea do voluptate. Culpa eu commodo proident officia. Amet id dolore incididunt in aliquip Lorem elit Lorem ex laboris nisi ex irure.'),
-                        ],
-                      ),
-                    );
-
-                    /*return SingleChildScrollView(
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          minHeight: constraints.maxHeight
-                        ),
-                        child: IntrinsicHeight(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Changelog',
-                                style: Theme.of(context).textTheme.headline3,
-                              ),
-                              SizedBox(height: 20),
-                              Text('November 2020',
-                                  style: Theme.of(context).textTheme.headline5),
-                              Text(
-                                  'Nostrud elit enim fugiat dolor quis deserunt dolor. Duis velit dolor proident ea do voluptate. Culpa eu commodo proident officia. Amet id dolore incididunt in aliquip Lorem elit Lorem ex laboris nisi ex irure.'),
-                              Divider(),
-                              Text('October 2020',
-                                  style: Theme.of(context).textTheme.headline5),
-                              Text(
-                                  'Nostrud elit enim fugiat dolor quis deserunt dolor. Duis velit dolor proident ea do voluptate. Culpa eu commodo proident officia. Amet id dolore incididunt in aliquip Lorem elit Lorem ex laboris nisi ex irure.'),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );*/
-                  });
-
-                case 2:
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Copyright',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      SizedBox(height: 20),
-                      Text('All your copyrights are belong to us.'),
-                      SizedBox(height: 20),
-                      Icon(
-                        Icons.copyright,
-                        size: 50,
-                      ),
-                    ],
-                  );
-
-                case 0:
-                default:
-                  return Text('About page');
-              }
-            },
-          )),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _tabIndex,
-        onTap: (index) {
-          setState(() {
-            _tabIndex = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.help_rounded), label: 'About'),
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Changelog'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.copyright), label: 'Copyright'),
-        ],
+      body: Container(
+        color: Color.fromRGBO(29, 53, 87, 1),
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(padding: EdgeInsets.fromLTRB(20, 20, 20, 10)),
+            Text('Ultimate List',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 32.0,
+                  color: Color.fromRGBO(230, 57, 70, 1),
+                  fontWeight: FontWeight.bold,
+                )),
+            //Spacer(),
+            Container(
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                border: Border.all(
+                    color: Color.fromRGBO(69, 123, 157, 1), width: 1.0),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                  'Progetto realizzato nell\'ambito del corso di Laurea Magistrale in Informatica Applicata \n Università degli Studi di Urbino'
+                  '\n Carlo Bo. \n \n Corso di Applicazioni Software e Programmazione per Dispositivi Mobili (A/A 2020/21)\n'
+                  '\n Titolare del corso: \n Prof. Cuno Lorenz Klopfenstein',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w300,
+                  )),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                border: Border.all(
+                    color: Color.fromRGBO(69, 123, 157, 1), width: 1.0),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                  'Ultimate List \n è stata realizzata da \nAndrea Cogorno \n \n a.cogorno@campus.uniurb.it',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w300,
+                  )),
+            )
+          ],
+        ),
       ),
     );
   }
