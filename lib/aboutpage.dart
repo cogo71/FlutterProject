@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AboutPage extends StatefulWidget {
@@ -6,7 +7,6 @@ class AboutPage extends StatefulWidget {
 }
 
 class _AboutPageState extends State<AboutPage> {
-  int _tabIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,59 +25,58 @@ class _AboutPageState extends State<AboutPage> {
           ),
         ),
       ),
-      body: Container(
-        color: Color.fromRGBO(29, 53, 87, 1),
-        padding: const EdgeInsets.all(15),
+      body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.max,
-          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(padding: EdgeInsets.fromLTRB(20, 20, 20, 10)),
-            Text('Ultimate List',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 32.0,
-                  color: Color.fromRGBO(230, 57, 70, 1),
-                  fontWeight: FontWeight.bold,
-                )),
-            //Spacer(),
+          children: <Widget>[
             Container(
-              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                border: Border.all(
-                    color: Color.fromRGBO(69, 123, 157, 1), width: 1.0),
-                borderRadius: BorderRadius.circular(10),
+              height: MediaQuery.of(context).size.height,
+              color: Color.fromRGBO(29, 53, 87, 1),
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Container(padding: EdgeInsets.fromLTRB(20, 20, 20, 10)),
+                  Text('Ultimate List',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 32.0,
+                        color: Color.fromRGBO(230, 57, 70, 1),
+                        fontWeight: FontWeight.bold,
+                      )),
+                  //Spacer(),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      border: Border.all(
+                          color: Color.fromRGBO(69, 123, 157, 1), width: 1.0),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text:
+                                'Progetto realizzato nell\'ambito del corso di Laurea Magistrale in Informatica Applicata\n'
+                                'Università degli Studi di Urbino'
+                                '\nCarlo Bo. \n \nCorso di Applicazioni Software e Programmazione per Dispositivi Mobili (A/A 2020/21)\n'
+                                '\nTitolare del corso: \nProf. Cuno Lorenz Klopfenstein',
+                            //'\n \nUltimate List è stata realizzata da Andrea Cogorno'
+                            //'\na.cogorno@campus.uniurb.it',
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              child: Text(
-                  'Progetto realizzato nell\'ambito del corso di Laurea Magistrale in Informatica Applicata \n Università degli Studi di Urbino'
-                  '\n Carlo Bo. \n \n Corso di Applicazioni Software e Programmazione per Dispositivi Mobili (A/A 2020/21)\n'
-                  '\n Titolare del corso: \n Prof. Cuno Lorenz Klopfenstein',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w300,
-                  )),
             ),
-            Container(
-              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                border: Border.all(
-                    color: Color.fromRGBO(69, 123, 157, 1), width: 1.0),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Text(
-                  'Ultimate List \n è stata realizzata da \nAndrea Cogorno \n \n a.cogorno@campus.uniurb.it',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w300,
-                  )),
-            )
           ],
         ),
       ),

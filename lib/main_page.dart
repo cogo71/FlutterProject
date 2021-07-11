@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'hamburger.dart';
 import 'model.dart';
-import 'item_page.dart';
+//import 'item_page.dart';
 
 class MainPage extends StatelessWidget {
   @override
@@ -71,6 +71,7 @@ class MainPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       FloatingActionButton(
+                          heroTag: "btn1",
                           child: const Icon(Icons.add),
                           tooltip: 'Premi per aggiungere un articolo',
                           backgroundColor: Color.fromRGBO(230, 57, 70, 1),
@@ -78,6 +79,7 @@ class MainPage extends StatelessWidget {
                             context.read<ToBuyList>().Add('prodotto');
                           }),
                       FloatingActionButton(
+                          heroTag: "btn2",
                           child: const Icon(Icons.clear_all),
                           tooltip: 'Premi per eliminare tutti gli articolo',
                           backgroundColor: Color.fromRGBO(230, 57, 70, 1),
@@ -104,9 +106,10 @@ class _ItemViewer extends StatelessWidget {
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  title: Text('Elimina'),
-                  content:
-                      Text('Sei sicuro di voler eliminare questo prodotto?'),
+                  title: Text('Elimina', style: TextStyle(color: Colors.white)),
+                  content: Text(
+                      'Sei sicuro di voler eliminare questo prodotto?',
+                      style: TextStyle(color: Colors.white)),
                   backgroundColor: Color.fromRGBO(69, 123, 157, 0.8),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
@@ -118,8 +121,8 @@ class _ItemViewer extends StatelessWidget {
                         },
                         style: ButtonStyle(
                             textStyle: MaterialStateProperty.all(TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white)))),
+                          fontWeight: FontWeight.bold,
+                        )))),
                     TextButton(
                         child: Text('Annulla'),
                         onPressed: () {
@@ -139,7 +142,7 @@ class _ItemViewer extends StatelessWidget {
           }
         },
         onTap: () {
-          final item = context.read<ToBuyItem>();
+          //final item = context.read<ToBuyItem>();
 
           Navigator.of(context).pushNamed('/item/${index}');
         },

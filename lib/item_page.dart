@@ -79,7 +79,7 @@ class _ItemPageState extends State<ItemPage> {
               children: [
                 FloatingActionButton(
                     child: const Icon(Icons.done_sharp),
-                    tooltip: 'Premi per aggiungere un articolo',
+                    tooltip: 'Premi per salvare le modifiche',
                     backgroundColor: Color.fromRGBO(230, 57, 70, 1),
                     onPressed: () {
                       Navigator.of(context).pop(true);
